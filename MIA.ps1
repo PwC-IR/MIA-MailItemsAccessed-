@@ -345,15 +345,15 @@ Function Main{
 	IF($Action){	
 		IF($Action -eq "Sessions"){
 			Sessions}
-		ELSEIF($Action -eq "MessageID"){
+		ELSEIF($Action -eq "Messages"){
 			MessageIDs}
-		ELSEIF($Action -eq "Mails"){
+		ELSEIF($Action -eq "Email"){
 			Email}
 		ELSE{
 			write-host "Possible actions are:"
-			write-host "-Sessions  | Find SessionID(s)"
-			write-host "-MessageID | Find InternetMessageID(s)"
-			write-host "-Mails     | Find emails belonging to the InternetMessageID(s)"}}
+			write-host "Sessions  | Find SessionID(s)"
+			write-host "Messages | Find InternetMessageID(s)"
+			write-host "Email     | Find email metadata for the InternetMessageID(s)"}}
 	ELSE{
 $help=@"
    ___  ___      __          ___          
