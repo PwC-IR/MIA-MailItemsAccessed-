@@ -1,3 +1,36 @@
+<#
+Copyright 2019 PricewaterhouseCoopers Advisory N.V.
+	
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that
+the following conditions are met:
+	1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+	2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+	   following disclaimer in the documentation and/or other materials provided with the distribution.
+	3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or
+	   promote products derived from this software without specific prior written permission.
+	
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+OF SUCH DAMAGE.
+HENCE, USE OF THE SCRIPT IS FOR YOUR OWN ACCOUNT, RESPONSIBILITY AND RISK. YOU SHOULD
+NOT USE THE (RESULTS OF) THE SCRIPT WITHOUT OBTAINING PROFESSIONAL ADVICE. PWC DOES
+NOT PROVIDE ANY WARRANTY, NOR EXPLICIT OR IMPLICIT, WITH REGARD TO THE CORRECTNESS
+OR COMPLETENESS OF (THE RESULTS) OF THE SCRIPT. PWC, ITS REPRESENTATIVES, PARTNERS
+AND EMPLOYEES DO NOT ACCEPT OR ASSUME ANY LIABILITY OR DUTY OF CARE FOR ANY
+(POSSIBLE) CONSEQUENCES OF ANY ACTION OR OMISSION BY ANYONE AS A CONSEQUENCE OF THE
+USE OF (THE RESULTS OF) SCRIPT OR ANY DECISION BASED ON THE USE OF THE INFORMATION
+CONTAINED IN (THE RESULTS OF) THE SCRIPT.
+‘PwC’ refers to the PwC network and/or one or more of its member firms. Each member firm in the PwC
+network is a separate legal entity. For further details, please see www.pwc.com/structure.
+#>
+
 param
 (
     [string]$Action,
@@ -320,62 +353,65 @@ Function Main{
 			write-host "-Mails | Find emails belonging to the InternetMessageID(s)"}}
 	ELSE{
 $help=@"
+
+
+   ___  ___      __          ___          
+  |   \/   |    |  |        /   \         
+  |  \  /  |    |  |       /  ^  \        
+  |  |\/|  |    |  |      /  /_\  \       
+  |  |  |  |  __|  |  __ /  _____  \   __ 
+  |__|  |__| (__)__| (__)__/     \__\ (__)
+                                          
+
 	 
 The script supports three actions, you can configure the action with the -Action flag.
   1. Sessions
-  2. MessageID
+  2. Messages
   3. Email
 
-####################################################################################################################################################################################  
-Sessions
-#################################################################################################################################################################################### 
-Find SessionID(s) in the Audit Log. You can filter based on IP address or Username.
-The first step is to identify what sessions belong to the threat actor. With this information you can go to the next step and find the MessageID(s) belonging to those sessions.
+.Sessions
+	Identify SessionID(s) in the Unified Audit Log. You can filter based on IP address or Username. 
 
-Example usage:
-Filter on Username and IP address
-.\MailItem_Extractor.ps1 -Action Sessions -User bobby@kwizzy.onmicrosoft.com -IP 95.96.75.118
+	Example usage:
+		Filter on Username and IP address
+		.\MailItem_Extractor.ps1 -Action Sessions -User johndoe@acme.onmicrosoft.com -IP 1.1.1.1
 
-Filter on IP address
-.\MailItem_Extractor.ps1 -Action Sessions -IP 95.96.75.118
+		Filter on IP address
+		.\MailItem_Extractor.ps1 -Action Sessions -IP 1.1.1.1
 
-Show all Sessions available in the Audit Log
-.\MailItem_Extractor.ps1 -Action Sessions
-####################################################################################################################################################################################  
-Messages
-####################################################################################################################################################################################  
-Find the InternetMessageID(s). You can filter on SessionID(s) or IP addresses. 
-After you identified the session(s) of the threat actor, you can use this information to find all MessageID(s) belonging to the sessions.
-With the MessageID(s) you can identify what emails were exposed to the threat actor.
+		Show all Sessions available in the Audit Log
+		.\MailItem_Extractor.ps1 -Action Sessions
 
-Example usage:
-Filter on SessionID(s) and IP address
-.\MailItem_Extractor.ps1 -Action MessageID -Sessions 19ebe2eb-a557-4c49-a21e-f2936ccdbc46,ad2dd8dc-507b-49dc-8dd5-7a4f4c113eb4 -IP 95.96.75.118
+		
+.Messages
+	Identify InternetMessageID(s) in the Unified Audit Log. You can filter on SessionID(s) or IP addresses. 
+	
+	Example usage:
+		
+		Filter on SessionID(s)
+		.\MailItem_Extractor.ps1 -Action MessageID -Sessions 19ebe2eb-a557-4c49-a21e-f2936ccdbc46,ad2dd8dc-507b-49dc-8dd5-7a4f4c113eb4
 
-Filter on SessionID(s)
-.\MailItem_Extractor.ps1 -Action MessageID -Sessions 19ebe2eb-a557-4c49-a21e-f2936ccdbc46,ad2dd8dc-507b-49dc-8dd5-7a4f4c113eb4
+		Filter on SessionID(s) and IP address
+		.\MailItem_Extractor.ps1 -Action MessageID -Sessions 19ebe2eb-a557-4c49-a21e-f2936ccdbc46,ad2dd8dc-507b-49dc-8dd5-7a4f4c113eb4 -IP 1.1.1.1
+		
+		Show all IntenetMessageID(s) available in the Unified Audit Log
+		.\MailItem_Extractor.ps1 -Action MessageID
 
-Show all MessageIDs available in the Audit Log
-.\MailItem_Extractor.ps1 -Action MessageID
+		Show all InternetMessageID(s) available in the Unified Audit Log and save the InternetMessageID(s) to .txt files 
+		.\MailItem_Extractor.ps1 -Action MessageID -Save yes
 
-Show all MessageIDs available in the Audit Log and find mails belonging to MessageID(s) and them to .txt files 
-.\MailItem_Extractor.ps1 -Action MessageID -Save yes
+.Email
+	Identify email metadata belonging to the InternetMessageID(s) and save them to a file or print them to the terminal.
 
-####################################################################################################################################################################################  
-Email
-####################################################################################################################################################################################  
-Find emails belonging to the MessageID(s) and save them to a file or print them to the Terminal.
-With the MessageID(s), we can use this option to find the metadata of the emails belonging to the ID(s).
+	Example usage:
+		Identify all emails belonging to the InternetMessageID(s) based on the input file and print them to the terminal
+		.\MailItem_Extractor.ps1 -Action Mails -Output Terminal -Input "C:\Users\test\Desktop\messageids.txt"
 
-Example usage:
-Find all emails belonging to the MessageID(s) stored in the input file and print them to the terminal
-.\MailItem_Extractor.ps1 -Action Mails -Output Terminal -Input "C:\Users\jrentenaar001\Desktop\messageids.txt"
+		Identify all emails belonging to the MessageID(s) based on the input file and save the output as a file
+		.\MailItem_Extractor.ps1 -Action Mails -Output File -Input "C:\Users\test\Desktop\messageids.txt"
 
-Find all emails belonging to the MessageID(s) stored in the input file and save them to a file
-.\MailItem_Extractor.ps1 -Action Mails -Output File -Input "C:\Users\jrentenaar001\Desktop\messageids.txt"
-
-Find all emails belonging to the MessageID(s) provided in the Terminal and print the emails to the Terminal
-.\MailItem_Extractor.ps1 -Action Mails -Output Terminal -IDs VI1PR01MB657547855449E4F22E7C2804B6E50@VI1PR01MB6575.eurprd01.prod.exchangelabs.com,VI1PR01MB65759C03FB572C407819A2F5B6E20@VI1PR01MB6575.eurprd01.prod.exchangelabs.com
+		Identify all emails belonging to the MessageID(s) provided in the terminal and print email metadata to the terminal, multiple IDs can be provided as comma separated values 
+		.\MailItem_Extractor.ps1 -Action Mails -Output Terminal -IDs VI1PR01MB657547855449E4F22E7C2804B6E50@VI1PR01MB6575.eurprd01.prod.exchangelabs.com
 "@
 	$help}}
 
