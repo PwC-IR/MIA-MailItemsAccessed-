@@ -1,5 +1,5 @@
-<h3>MIA</h3>
-MIA makes it possible to extract Sessions, MessageID(s) and find emails belonging to the MessageID(s). This script utilizes the MailItemsAccessed features from the Office 365 Audit Log.
+<h3>M.I.A.</h3>
+M.I.A. short for MailItemsAccessed makes it possible to extract Sessions, MessageID(s) and find emails belonging to the MessageID(s). This script utilizes the MailItemsAccessed features from the Office 365 Audit Log.
 The goal of this script is to help investigators answer the question: <b>What email data was accessed by the threat actor?</b><br><br>
 
 The script supports three actions, you can configure the action with the -Action flag.
