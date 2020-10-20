@@ -303,7 +303,7 @@ Function Email{
 	Import-PSSession $Session
 	
 	$Today = Get-Date -Format "MM/dd/yyyy"
-	$30daysago = $(get-date).AddDays(-30).ToString("MM/dd/yyyy")
+	$7days = $(get-date).AddDays(-7).ToString("MM/dd/yyyy")
 	$EmailFolder = "\Email_Files\"
 	$SavedEmails = Join-Path $PSScriptRoot $EmailFolder
 	
@@ -313,7 +313,7 @@ Function Email{
 	IF($Output -eq "Terminal" -And !$Inputfile){
 		$IDs.Split(" ") | ForEach{
 			$ID = $_
-			Get-MessageTrace -StartDate $30daysago -EndDate $Today -MessageID $ID | fl * }}
+			Get-MessageTrace -StartDate $7days -EndDate $Today -MessageID $ID | fl * }}
 	
 	ELSEIF($Output -eq "File" -And !$Inputfile){
 		$IDs.Split(" ") | ForEach{
@@ -321,18 +321,18 @@ Function Email{
 			$Txtfile = "$ID"+".txt"
 			$finalPath = $SavedEmails + $Txtfile
 			write-host "Saving output to: $finalPath"
-			Get-MessageTrace -StartDate $30daysago -EndDate $Today -MessageID $ID | fl * | Out-File -FilePath $finalPath}}
+			Get-MessageTrace -StartDate $7days -EndDate $Today -MessageID $ID | fl * | Out-File -FilePath $finalPath}}
 	
 	ELSEIF($Output -eq "Terminal" -And $Inputfile){
 		foreach($line in Get-Content $Inputfile){
-			Get-MessageTrace -StartDate $30daysago -EndDate $Today -MessageID $line| fl * }}
+			Get-MessageTrace -StartDate $7days -EndDate $Today -MessageID $line| fl * }}
 	
 	ELSEIF($Output -eq "File" -And $Inputfile){
 		foreach($line in Get-Content $Inputfile){
 			$Txtfile = "$line"+".txt"
 			$finalPath = $SavedEmails + $Txtfile
 			write-host "Saving output to: $finalPath"
-			Get-MessageTrace -StartDate $30daysago -EndDate $Today -MessageID $line | fl * | Out-File -FilePath $finalPath}}
+			Get-MessageTrace -StartDate $7days -EndDate $Today -MessageID $line | fl * | Out-File -FilePath $finalPath}}
 	Remove-PSSession -ID $Session.ID}
 
 
