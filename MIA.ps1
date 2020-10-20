@@ -402,13 +402,13 @@ The script supports three actions, you can configure the action with the -Action
   
   Example usage:
     Identify all emails belonging to the InternetMessageID(s) based on the input file and print them to the terminal
-    .\MIA.ps1 -Action Mails -Output Terminal -Input "C:\Users\test\Desktop\messageids.txt"
+    .\MIA.ps1 -Action Email -Output Terminal -Input "C:\Users\test\Desktop\messageids.txt"
     
     Identify all emails belonging to the MessageID(s) based on the input file and save the output as a file
-    .\MIA.ps1 -Action Mails -Output File -Input "C:\Users\test\Desktop\messageids.txt"
+    .\MIA.ps1 -Action Email -Output File -Input "C:\Users\test\Desktop\messageids.txt"
     
     Identify all emails belonging to the MessageID(s) provided in the terminal and print email metadata to the terminal, multiple IDs can be provided as comma separated values 
-    .\MIA.ps1 -Action Mails -Output Terminal -IDs VI1PR01MB657547855449E4F22E7C2804B6E50@VI1PR01MB6575.eurprd01.prod.exchangelabs.com
+    .\MIA.ps1 -Action Email -Output Terminal -IDs VI1PR01MB657547855449E4F22E7C2804B6E50@VI1PR01MB6575.eurprd01.prod.exchangelabs.com
 	
 Custom script was developed by Joey Rentenaar and Korstiaan Stam from PwC Netherlands Incident Response team. 
 
