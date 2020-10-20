@@ -37,11 +37,11 @@ Find emails belonging to the MessageID(s) and save them to a file or print them 
 With the MessageID(s), we can use this option to find the metadata of the emails belonging to the ID(s).<br><br>
 <b>Example usage</b><br>
 Find all emails belonging to the MessageID(s) stored in the input file and print them to the terminal<br>
-.\MIA.ps1 -Action Mails -Output Terminal -Input "C:\Users\jrentenaar001\Desktop\messageids.txt"<br><br>
+.\MIA.ps1 -Action Email -Output Terminal -Input "C:\Users\jrentenaar001\Desktop\messageids.txt"<br><br>
 Find all emails belonging to the MessageID(s) stored in the input file and save them to a file<br>
-.\MIA.ps1 -Action Mails -Output File -Input "C:\Users\jrentenaar001\Desktop\messageids.txt"<br><br>
+.\MIA.ps1 -Action Email -Output File -Input "C:\Users\jrentenaar001\Desktop\messageids.txt"<br><br>
 Find all emails belonging to the MessageID(s) provided in the Terminal and print the emails to the Terminal<br>
-.\MIA.ps1 -Action Mails -Output Terminal -IDs VI1PR01MB657547855449E4F22E7C2804B6E50@VI1PR01MB6575.eurprd01.prod.exchangelabs.com,VI1PR01MB65759C03FB572C407819A2F5B6E20@VI1PR01MB6575.eurprd01.prod.exchangelabs.com
+.\MIA.ps1 -Action Email -Output Terminal -IDs VI1PR01MB657547855449E4F22E7C2804B6E50@VI1PR01MB6575.eurprd01.prod.exchangelabs.com,VI1PR01MB65759C03FB572C407819A2F5B6E20@VI1PR01MB6575.eurprd01.prod.exchangelabs.com
 
 <h3>Prerequisites</h3>
 	-PowerShell<br>
